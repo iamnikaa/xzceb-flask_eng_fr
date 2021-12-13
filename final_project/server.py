@@ -1,24 +1,32 @@
+"""Server side implementation of language translator webpage using flask"""
 from machinetranslation import translator
 from flask import Flask, render_template, request
 import json
 
-app = Flask("Web Translator")
+app = Flask(__name__)
 
 @app.route("/englishToFrench")
 def englishToFrench():
+    """Configures route for english to french button"""
     textToTranslate = request.args.get('textToTranslate')
-    # Write your code here
-    return "Translated text to French"
+    if textToTranslate != "":
+        return translator.englishToFrench(textToTranslate)
+    else:
+        return "Invalid Input"
 
 @app.route("/frenchToEnglish")
 def frenchToEnglish():
+    """Configures route for french to english button"""
     textToTranslate = request.args.get('textToTranslate')
-    # Write your code here
-    return "Translated text to English"
+    if textToTranslate != "":
+        return translator.frenchToEnglish(textToTranslate)
+    else:
+        return "Invalid Input"
 
 @app.route("/")
 def renderIndexPage():
-    # Write the code to render template
+    """Renders homepage"""
+    return render_template('index.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8080)
+    app.run(debug=True)
