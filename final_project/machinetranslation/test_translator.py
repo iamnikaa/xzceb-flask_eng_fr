@@ -16,4 +16,4 @@ class TranslatorTest(unittest.TestCase):
         self.assertNotEqual(frenchToEnglish("Hello"), "")
         self.assertEqual(frenchToEnglish("Bonjour"), "Hello")
 
-unittest.main()
+unittest.main(verbosity=2)
